@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave save file: 5 x 7 example from tb_mult, showing the 2-cycle latency.
+[*] Open from the repo root inside the container:  gtkwave mult.vcd report/figures/mult.gtkw
+[*]
+[dumpfile] "/foss/designs/4-bit_Array_Multiplier_from_RTL_to_GDSII/mult.vcd"
+[timestart] 1730000
+[size] 1400 360
+[pos] 0 0
+*-13.560000 1775000 1760000 1765000 1775000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[markername] Aa=5,b=7
+[markername] Bedge 1
+[markername] Cedge 2: p=35
+[treeopen] tb_mult.
+[signals_width] 160
+[sst_expanded] 0
+[sst_vpaned_height] 150
+@200
+-
+@28
+tb_mult.clk
+tb_mult.rst_n
+@24
+tb_mult.a[3:0]
+tb_mult.b[3:0]
+tb_mult.p[7:0]
