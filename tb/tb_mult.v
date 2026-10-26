@@ -1,16 +1,3 @@
-// tb_mult.v
-// Exhaustive, self-checking testbench for mult_array.
-//
-// - 10 ns period clock, rst_n held low for the first 2 clock cycles.
-// - Applies all 256 combinations of a (0..15) and b (0..15).
-// - Inputs change on a falling edge. For each combination, waits the
-//   2-cycle latency (input captured at rising edge 1, product captured at
-//   rising edge 2), then at the next falling edge compares p
-//   against the expected value computed with the `*` operator, which is
-//   allowed here in the testbench only (the DUT itself never uses `*`).
-// - Prints a line for every mismatch and one final PASS/FAIL summary line.
-// - Dumps all signals to mult.vcd for waveform viewing.
-
 `timescale 1ns / 1ps
 
 module tb_mult;
@@ -58,15 +45,13 @@ module tb_mult;
             for (j = 0; j < 16; j = j + 1) begin
                 a        = i[3:0];
                 b        = j[3:0];
-                expected = a * b; // `*` allowed only in the testbench
+                expected = a * b;
 
                 // 2-cycle latency: edge 1 captures a,b into the input
                 // registers; edge 2 captures the product into p.
                 @(posedge clk);
                 @(posedge clk);
-                // Compare mid-cycle: gate-level flip-flop models update Q
-                // 1 time unit after the edge, so sampling at the falling
-                // edge avoids a race with the clk-to-q delay.
+                // Compare mid-cycle
                 @(negedge clk);
 
                 vectors = vectors + 1;
