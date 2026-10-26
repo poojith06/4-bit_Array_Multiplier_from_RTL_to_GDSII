@@ -1,22 +1,3 @@
-// mult_array.v
-// 4-bit x 4-bit unsigned array multiplier, registered inputs and output.
-//
-// Structure (see Section 2 of RTL_to_GDS.pdf):
-//   - a and b are registered into a_reg, b_reg on every rising clk edge.
-//   - 16 AND gates form the 4 partial products pp0..pp3 from the
-//     registered operands: ppi[j] = a_reg[j] & b_reg[i].
-//   - Row 0 is pure AND gates: p[0] = pp0[0], the other 3 bits (pp0[3:1])
-//     pass down to row 1 as r0.
-//   - Rows 1, 2, 3 are each a 4-bit ripple-carry adder (4 full_adder
-//     instances) built exactly from the connection table in Section 2.
-//   - Row 3 also produces the top 4 product bits p[7:4].
-//   - The 8-bit sum is registered into p on the next rising clk edge,
-//     giving 16 flip-flops total (8 for a/b, 8 for p) and a 2-cycle
-//     input-to-output latency.
-//
-// rst_n is an asynchronous active-low reset: it clears all registers to 0.
-// No `*` operator is used anywhere in this module.
-
 module mult_array (
     input        clk,
     input        rst_n,
@@ -25,9 +6,7 @@ module mult_array (
     output [7:0] p
 );
 
-    // ---------------------------------------------------------------
     // Input registers: 4 + 4 = 8 flip-flops
-    // ---------------------------------------------------------------
     reg [3:0] a_reg, b_reg;
 
     always @(posedge clk or negedge rst_n) begin
@@ -40,9 +19,7 @@ module mult_array (
         end
     end
 
-    // ---------------------------------------------------------------
     // Partial products: 16 AND gates, ppi[j] = a_reg[j] AND b_reg[i]
-    // ---------------------------------------------------------------
     wire [3:0] pp0, pp1, pp2, pp3;
 
     assign pp0 = a_reg & {4{b_reg[0]}};
@@ -50,9 +27,7 @@ module mult_array (
     assign pp2 = a_reg & {4{b_reg[2]}};
     assign pp3 = a_reg & {4{b_reg[3]}};
 
-    // ---------------------------------------------------------------
     // Combinational product bits (registered into p below)
-    // ---------------------------------------------------------------
     wire [7:0] p_comb;
 
     // Row 0: no adders. p_comb[0] is the final bit; pp0[3:1] pass down.
@@ -99,9 +74,7 @@ module mult_array (
     assign p_comb[3]   = s3[0];
     assign p_comb[7:4] = {c3[4], s3[3], s3[2], s3[1]};
 
-    // ---------------------------------------------------------------
     // Output register: 8 flip-flops
-    // ---------------------------------------------------------------
     reg [7:0] p_reg;
 
     always @(posedge clk or negedge rst_n) begin

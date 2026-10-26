@@ -1,7 +1,3 @@
-// full_adder.v
-// 1-bit combinational full adder, written purely with assign statements.
-// sum = a XOR b XOR cin
-// cout = majority(a, b, cin)
 module full_adder (
     input  a,
     input  b,
@@ -11,6 +7,6 @@ module full_adder (
 );
 
     assign sum  = a ^ b ^ cin;
-    assign cout = (a & b) | (b & cin) | (a & cin);
+    assign cout = (a & b) | ((a^b)&cin);
 
 endmodule
