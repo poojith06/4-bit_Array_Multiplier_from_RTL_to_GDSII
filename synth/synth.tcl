@@ -1,5 +1,3 @@
-# synth.tcl
-# Yosys synthesis script for mult_array (Part B of RTL_to_GDS.pdf).
 # Run with: yosys -c synth/synth.tcl
 
 set lib $::env(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
