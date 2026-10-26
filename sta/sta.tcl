@@ -1,10 +1,4 @@
-# sta.tcl
-# OpenSTA static timing analysis script for mult_array (Part C of RTL_to_GDS.pdf).
 # Run with: sta sta/sta.tcl
-#
-# T is the clock period in ns. Per Part C: first run with T=10, read the
-# worst slack, compute Tmin = T - WNS, then edit T below to Tmin (rounded
-# to 0.01 ns) and rerun to confirm slack is close to 0.
 
 set lib $::env(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 set T 2.98
