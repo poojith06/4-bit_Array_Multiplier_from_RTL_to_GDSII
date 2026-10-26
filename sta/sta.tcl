@@ -7,7 +7,7 @@
 # to 0.01 ns) and rerun to confirm slack is close to 0.
 
 set lib $::env(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-set T 2.60
+set T 2.98
 
 # Step 1: read the cell timing library
 read_liberty $lib
