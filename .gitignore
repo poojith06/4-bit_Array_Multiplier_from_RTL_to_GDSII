@@ -11,3 +11,7 @@ report/*.aux
 report/*.log
 report/*.out
 report/report.tex
+
+# Hand-drawn block diagram scan and the image cropped from it
+report/New Note 2026-10-26 22-02-04-1.pdf
+report/figures/block_diagram_hand.png
